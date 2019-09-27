@@ -1,16 +1,16 @@
 cas:
+  adminPagesSecurity:
+    ip: 127.0.0.1
   authn:
-    #    accept:
-    #      users: admin::admin
     jdbc:
-      query:
+      encode:
         - dialect: org.hibernate.dialect.MySQLDialect
           driverClass: com.mysql.cj.jdbc.Driver
-          fieldDisabled: disabled
-          fieldExpired: expired
-          fieldPassword: password
-          sql: select * from sys_user_encode where username=?
-          url: jdbc:mysql://127.0.0.1:3306/cas?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+          disabledFieldName: disabled
+          expiredFieldName: expired
+          passwordFieldName: password
+          sql: select * from spring_user where username=?
+          url: jdbc:mysql://127.0.0.1:3306/springboot?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
           user: root
           password: root
           algorithmName: MD5 #对处理盐值后的算法

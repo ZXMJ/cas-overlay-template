@@ -6,6 +6,31 @@
     <groupId>org.apereo.cas</groupId>
     <artifactId>cas-overlay</artifactId>
     <packaging>war</packaging>
+    <dependencies>
+        <!--restful方式验证用户名密码-->
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-support-rest-authentication</artifactId>
+            <version>${cas.version}</version>
+        </dependency>
+        <!--jdbc方式验证用户名密码-->
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-support-jdbc-drivers</artifactId>
+            <version>${cas.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-support-jdbc</artifactId>
+            <version>${cas.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.driver.version}</version>
+        </dependency>
+    </dependencies>
+
     <version>1.0</version>
 
     <build>
@@ -65,7 +90,7 @@
         </plugins>
         <finalName>cas</finalName>
     </build>
-
+    <!--数据库认证相关 start-->
     <properties>
         <cas.version>5.3.12</cas.version>
         <springboot.version>1.5.18.RELEASE</springboot.version>
@@ -84,26 +109,6 @@
         <cas.version>5.3.8</cas.version>
         <mysql.driver.version>8.0.15</mysql.driver.version>
     </properties>
-    <!--数据库认证相关 start-->
-    <dependencies>
-
-
-        <dependency>
-            <groupId>org.apereo.cas</groupId>
-            <artifactId>cas-server-support-jdbc-drivers</artifactId>
-            <version>${cas.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apereo.cas</groupId>
-            <artifactId>cas-server-support-jdbc</artifactId>
-            <version>${cas.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>${mysql.driver.version}</version>
-        </dependency>
-    </dependencies>
     <repositories>
         <repository>
             <id>sonatype-releases</id>

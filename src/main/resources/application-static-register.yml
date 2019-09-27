@@ -1,22 +1,22 @@
 cas:
-  adminPagesSecurity:
-    ip: 127.0.0.1
+  adminPagesSecurit:
+  ip: 127.0.0.1
   authn:
-    jdbc:
-      query:
-        - dialect: org.hibernate.dialect.MySQLDialect
-          driverClass: com.mysql.cj.jdbc.Driver
-          fieldDisabled: disabled
-          fieldExpired: expired
-          fieldPassword: password
-          sql: select * from spring_user where username=?
-          url: jdbc:mysql://127.0.0.1:3306/springboot?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
-          user: root
-          password: root
-          passwordEncoder:
-            type: DEFAULT
-            characterEncoding: UTF-8
-            encodingAlgorithm: MD5
+    accept:
+      users: admin::admin
+  serviceRegistry:
+    initFromJson: true #开启json服务注册
+  logout:
+    followServiceRedirects: true #登出后允许跳转到指定页面
+tgt:
+  maxTimeToLiveInSeconds: 28800 #指定Session的最大有效时间,即从生成到指定时间后就将超时,默认28800s,即8小时
+  timeToKillInSeconds: 7200 #指定用户操作的超时时间,即用户在多久不操作后就超时,默认7200s,即2小时。
+  #还要注意客户端web.xml配置的超时时间，即只有客户端配置超时时间不大于tgt.timeToKillInSeconds时才能看见服务端设置的效果
+st:
+  timeToKillInSeconds: 10 #指定service ticket的有效时间,默认10s， 这也是debug追踪CAS应用认证过程中经常会失败的原因,因为追踪的时候service ticket已经过了10秒有效期了
+slo:
+  callbacks:
+    disabled: false #是否禁用单点登出
 endpoints:
   enabled: false
   restart:
