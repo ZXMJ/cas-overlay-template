@@ -14,7 +14,7 @@ cas:
           user: root
           password: root
           passwordEncoder:
-            type: com.ultra.CustomPasswordEncoder
+            type: com.ultra.encoder.CustomPasswordEncoder
             characterEncoding: UTF-8
             encodingAlgorithm: MD5
 endpoints:

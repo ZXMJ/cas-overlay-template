@@ -1,10 +1,13 @@
-package com.ultra;
+package com.ultra.encoder;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
 
+/**
+ * @author admin
+ */
 public class CustomPasswordEncoder implements PasswordEncoder {
     @Override
     public String encode(CharSequence rawPassword) {

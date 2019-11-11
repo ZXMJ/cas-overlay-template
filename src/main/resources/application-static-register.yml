@@ -1,6 +1,6 @@
 cas:
-  adminPagesSecurit:
-  ip: 127.0.0.1
+  adminPagesSecurity:
+    ip: 127.0.0.1
   authn:
     accept:
       users: admin::admin
