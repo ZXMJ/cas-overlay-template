@@ -8,6 +8,8 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.conn.socket.LayeredConnectionSocketFactory;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
@@ -21,6 +23,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -70,22 +73,18 @@ public class CasServerUtil {
     public static String getTGT(String username, String password) {
         try {
             CookieStore httpCookieStore = new BasicCookieStore();
-//        CloseableHttpClient client = createHttpClientWithNoSsl(httpCookieStore);
-
             CloseableHttpClient client = HttpClients.createDefault();
 
             HttpPost httpPost = new HttpPost(GET_TOKEN_URL);
-            List<NameValuePair> params = new ArrayList<NameValuePair>();
-            params.add(new BasicNameValuePair("username", username));
-            params.add(new BasicNameValuePair("password", password));
-            httpPost.setEntity(new UrlEncodedFormEntity(params));
+            StringEntity entity = new StringEntity("{\"name\":\"admin\",\"password\":\"admin\"}", ContentType.APPLICATION_JSON);
+            httpPost.setEntity(entity);
             HttpResponse response = client.execute(httpPost);
 
-//        System.out.println("\n 获取TGT，Header响应");
-//        Header[] allHeaders = response.getAllHeaders();
-//        for (int i = 0; i < allHeaders.length; i++) {
-//            System.out.println("Key：" + allHeaders[i].getName() + "，Value：" + allHeaders[i].getValue() + "，Elements:" + Arrays.toString(allHeaders[i].getElements()));
-//        }
+            System.out.println("\n 获取TGT，Header响应");
+            Header[] allHeaders = response.getAllHeaders();
+            for (int i = 0; i < allHeaders.length; i++) {
+                System.out.println("Key：" + allHeaders[i].getName() + "，Value：" + allHeaders[i].getValue() + "，Elements:" + Arrays.toString(allHeaders[i].getElements()));
+            }
 
             Header headerLocation = response.getFirstHeader("Location");
             String location = headerLocation == null ? null : headerLocation.getValue();
